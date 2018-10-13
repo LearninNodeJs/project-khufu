@@ -83,7 +83,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Project-Khufu'
+      title: 'Vuetify.js'
     }
   },
   name: 'App'
