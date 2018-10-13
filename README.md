@@ -1,7 +1,10 @@
 # project-khufu
  	clone or download
 # Run:
-	composer install
-	npm install
-	npm audit fix
-	npm run dev
+	cd api
+		composer install
+	cd ..
+	cd vue
+		npm install
+		npm audit fix
+		npm run dev
