@@ -7,9 +7,9 @@ export default(module) =>{
       return axios.create({
         baseURL:''//Replace with authentication api url
       });
-    case '':
+    case 'login':
       return axios.create({
-        baseURL:'' //Add another case for different api functions
+        baseURL:'http://localhost' //Add another case for different api functions
       });
     default:
       return axios.create({

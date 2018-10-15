@@ -16,20 +16,35 @@ export const store = new Vuex.Store({
       state.loading = payload;
     },
     setError(state,payload){
-      state.error=payload;
+      state.error = payload;
     },
     clearError(state){
-      state.error=null;
+      state.error = null;
     },
     setToken(state,payload){
-      state.token=payload;
+      state.token = payload;
     },
     clearToken(state){
-      state.token= null;
+      state.token = null;
     }
   },
   actions:{
     //Include actions that call rest apis
+    async login({commit}){
+      
+      let response;
+      try{
+        alert(response);
+        commit('clearError');
+        commit('setLoading', true);
+        response = await api('login').get('/user/login');
+        commit('setToken', response.data);
+        commit('setLoading', false);
+      }catch(error){
+        commit('setError', error);
+        commit('setLoading', false);
+      }
+    }
   },
   getters: {
     token(state) {
