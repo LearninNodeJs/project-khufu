@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout align-center justify-center v-if="error">
-      <v-flex xs8 sm6>
+      <v-flex xs12 sm6>
         <app-alert @dismissed="onDismissed" :text="error"></app-alert>
       </v-flex>
     </v-layout>
