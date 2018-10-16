@@ -1,5 +1,10 @@
 <template>
   <v-container fluid>
+    <v-layout align-center justify-center v-if="error">
+      <v-flex xs8 sm6>
+        <app-alert @dismissed="onDismissed" :text="error"></app-alert>
+      </v-flex>
+    </v-layout>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6>
         <v-card class="elevation-10">
@@ -59,6 +64,12 @@
     computed:{
         isFormValid(){
           return this.email !== '' && this.password !==''
+        },
+        isLoading(){
+          return this.$store.state.loading;
+        },
+        error(){
+          return this.$store.error;
         }
     }
   }
