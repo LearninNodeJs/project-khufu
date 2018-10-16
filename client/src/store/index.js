@@ -31,10 +31,8 @@ export const store = new Vuex.Store({
   actions:{
     //Include actions that call rest apis
     async login({commit}, payload){
-      
       let response;
       try{
-
         commit('clearError');
         commit('setLoading', true);
         response = await api('login').post('/user/login', payload);

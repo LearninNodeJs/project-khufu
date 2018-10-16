@@ -1,5 +1,10 @@
 <template>
   <v-container fluid>
+    <v-layout align-center justify-center v-if="error">
+      <v-flex xs12 sm6>
+        <app-alert @dismissed="onDismissed" :text="error"></app-alert>
+      </v-flex>
+    </v-layout>
     <v-layout justify-center align-center>
       <v-flex xs12 sm6>
         <v-card class="elevation-10">
@@ -46,14 +51,25 @@
       }
     },
     methods:{
+      async login(){
+        try{
+          this.$store.dispatch('login',{email:this.email,password:this.password});
+          this.$store.dispatch('setToken',response.data.jwt);
 
-      login(){
-        this.$store.dispatch('login');
+        }catch (e) {
+          console.log(e.message);
+        }
       }
     },
     computed:{
         isFormValid(){
           return this.email !== '' && this.password !==''
+        },
+        isLoading(){
+          return this.$store.state.loading;
+        },
+        error(){
+          return this.$store.error;
         }
     }
   }

@@ -7,9 +7,11 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import {sync} from 'vuex-router-sync';
 import {store} from './store'
+import AlertComponent from './components/utils/Alert'
 Vue.use(Vuetify)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.component('app-alert',AlertComponent);
 
 /* eslint-disable no-new */
 sync(store,router);
