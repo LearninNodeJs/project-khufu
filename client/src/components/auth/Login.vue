@@ -46,9 +46,14 @@
       }
     },
     methods:{
+      async login(){
+        try{
+          this.$store.dispatch('login',{email:this.email,password:this.password});
+          this.$store.dispatch('setToken',response.data.jwt);
 
-      login(){
-        this.$store.dispatch('login',{email:this.email,password:this.password});
+        }catch (e) {
+          console.log(e.message);
+        }
       }
     },
     computed:{

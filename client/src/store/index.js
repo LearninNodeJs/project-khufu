@@ -36,7 +36,6 @@ export const store = new Vuex.Store({
         commit('clearError');
         commit('setLoading', true);
         response = await api('login').post('/user/login', payload);
-        this.$store.dispatch('setToken',response.data.token);
         // alert(response.data.jwt);
         commit('setToken', response.data.jwt);
         commit('setLoading', false);
