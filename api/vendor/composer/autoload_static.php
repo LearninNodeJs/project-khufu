@@ -19,6 +19,10 @@ class ComposerStaticInit7c0baa335460178fecca298af007aa1c
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -37,6 +41,10 @@ class ComposerStaticInit7c0baa335460178fecca298af007aa1c
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Core\\' => 
         array (

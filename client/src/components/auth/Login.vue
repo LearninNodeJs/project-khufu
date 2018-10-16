@@ -28,7 +28,7 @@
               required>
             </v-text-field>
             <div class="text-xs-center mt-3">
-              <v-btn type="submit" :disabled="!isFormValid" outline>
+              <v-btn type="submit" @click.native="login" :disabled="!isFormValid" outline>
                 LOGIN</v-btn>
             </div>
           </v-card-text>
@@ -39,12 +39,18 @@
 </template>
 <script>
   export default {
-      data(){
-        return{
-          email:'',
-          password:''
-        }
-      },
+    data(){
+      return{
+        email: '',
+        password: ''
+      }
+    },
+    methods:{
+
+      login(){
+        this.$store.dispatch('login');
+      }
+    },
     computed:{
         isFormValid(){
           return this.email !== '' && this.password !==''
