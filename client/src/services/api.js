@@ -9,7 +9,7 @@ export default(module) =>{
       });
     case 'login':
       return axios.create({
-        baseURL:'http://localhost' //Add another case for different api functions
+        baseURL:'http://localhost/user/login' //Add another case for different api functions
       });
     default:
       return axios.create({

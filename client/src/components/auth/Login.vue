@@ -54,7 +54,7 @@
       async login(){
         try{
           this.$store.dispatch('login',{email:this.email,password:this.password});
-          this.$store.dispatch('setToken',response.data.jwt);
+          // this.$store.dispatch('setToken',response.data.jwt);
 
         }catch (e) {
           console.log(e.message);

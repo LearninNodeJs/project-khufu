@@ -14,12 +14,25 @@ use Firebase\JWT\JWT;
  */
 class User extends \Core\Controller
 {
-    private $con;
+    private $uModel;
 
     function __construct(){
 
-        $this->con = new UserModel();
+        $this->uModel = new UserModel();
     }
+
+    public function userDash(){
+        // $data = trim(file_get_contents('php://input'));
+        // $data = json_decode($data, false);
+        // $id = $data->id;
+        $id = 1;
+
+        $userData['user'] = $this->uModel->get_user($id);
+        $userData['lease'] = $this->uModel->get_leases($id);
+
+        print_r(json_encode($userData));
+    }
+
 
     /**
      * Show the index page
@@ -38,62 +51,81 @@ class User extends \Core\Controller
      */
     public function loginAction()
     {
-    
-    //View::render('Home/index.html');
-      /* return *///
-      // echo json_encode(file_get_contents('php://input')); exit;
-      $user = $this->con->login('speedflakes@gmail.com', 'admin');
+        $email = "";
+        $password = "";
+        $login_data = trim(file_get_contents('php://input'));
+        $login_data = json_decode($login_data, false);
+        if(is_object($login_data)){
 
-       $tokenId = base64_encode(openssl_random_pseudo_bytes(32));
-                $issuedAt = time();
-                $notBefore = $issuedAt + 10;
-                $expire = $notBefore + 60;
-                $serverName = Config::JWT_INFO['serverName'];
-                
-                $data = [
-                        'iat' => $issuedAt,
-                        'jti' => $tokenId,
-                        'iss' => $serverName,
-                        'nbf' => $notBefore,
-                        'exp' => $expire,
-                        'data' => [
-                            'userId' => $user[0],
-                            'fname' => $user[1],
-                            'lname' => $user[2],
-                            'email' => $user[3],
-                            'phone' => $user[4],
-                        ]
-                    ];
+            $email = $login_data->email;
+            $password = $login_data->password;
+        }else{
+            echo "not";
+        }
+        // print_r($login_data->email);
+        // $login_data = get_object_vars($login_data);
 
-                $secretKey = base64_encode(Config::JWT_INFO['jwt']['key']);
-                $algorithm = Config::JWT_INFO['jwt']['algorithm'];
-                $jwt = JWT::encode($data, $secretKey, $algorithm);
+        $user = $this->uModel->login($email, $password);
 
-                $unencodedArr = ['jwt' => $jwt];
+        if(!$user['error']){
+
+            $tokenId = base64_encode(openssl_random_pseudo_bytes(32));
+            $issuedAt = time();
+            $notBefore = $issuedAt + 10;
+            $expire = $notBefore + 60;
+            $serverName = Config::JWT_INFO['serverName'];
+            
+            $data = [
+                    // 'iat' => $issuedAt,
+                    'jti' => $tokenId,
+                    // 'iss' => $serverName,
+                    // 'nbf' => $notBefore,
+                    // 'exp' => $expire,
+                    'data' => [
+                        'userId' => $user[0],
+                        'fname' => $user[1],
+                        'lname' => $user[2],
+                        'email' => $user[3],
+                        'phone' => $user[4],
+                    ]
+                ];
+
+            $secretKey = base64_encode(Config::JWT_INFO['jwt']['key']);
+            $algorithm = Config::JWT_INFO['jwt']['algorithm'];
+            $jwt = JWT::encode($data, $secretKey, $algorithm);
+
+            $unencodedArr = ['jwt' => $jwt, 'status' => 201];
+
+            // echo json_encode(['status' => 201]);
 
             echo json_encode($unencodedArr);
+        } else {
+
+            echo json_encode(['status' => 403]);
+        }
     }
+
 
     public function seed(){
         $typeM = [0, 1, 2, 3, 4];
         $typeB = [5, 2, 3, 4, 5];
         $id = 1;
         // $transction_type = $_POST['tr_type'];
-        $transction_type = 'mpesa_records';
+        $transction_type = 'bank_records';
 
         $type = $typeM[0];
 
         //get range for number of records
         $range = rand(rand(20, 70), rand(70, 130));
         //get user
-        $user = $this->con->get_user($id);
+        $user = $this->uModel->get_user($id);
 
         if(!isset($user['fname'])){
             echo json_encode(['error' => true, 'error_r' =>'user does not exist']);
         }else{
 
             //check last bal_before
-            $bal_before = $this->con->last_payment_record($transction_type, $id);
+            $bal_before = $this->uModel->last_finance_record($transction_type, $id);
             if(!isset($bal_before['bal_after'])){
                 $bal_before = 0;
             }else{
@@ -109,23 +141,29 @@ class User extends \Core\Controller
 
                 //if last bal_before is 0, or < amount generated, then add amount to account
                 if($amount > $bal_before){
-                    $bal_before = $this->con->add_payment_record($transction_type, $amount, $bal_before, $id, $fname, $lname);
-                    echo "$bal_before <br>";
+                    $bal_before = $this->uModel->add_payment_record($transction_type, $amount, $bal_before, $id, $fname, $lname);
 
                 }else if(($amount < $bal_before) && ((rand(2, 7)%2) == 0) || ((rand(2, 9)%3) == 0)){ //else at rand count,if last balance is > 0, or > amount generated, then subtract amount to account (record an expenditure)
                     $amount = 0 - $amount;
-                    $bal_before = $this->con->add_payment_record($transction_type, $amount, $bal_before, $id, $fname, $lname);
-                    echo "$bal_before <br>";
+                    $bal_before = $this->uModel->add_payment_record($transction_type, $amount, $bal_before, $id, $fname, $lname);
 
                 }else{//just add
-                    $bal_before = $this->con->add_payment_record($transction_type, $amount, $bal_before, $id, $fname, $lname);
-                    echo "$bal_before <br>";
+                    $bal_before = $this->uModel->add_payment_record($transction_type, $amount, $bal_before, $id, $fname, $lname);
                 }
 
                 
                 
             }
         }
+    }
+
+    public function getUserFinance(){
+
+        $id = 1;
+
+        $finances =  $this->uModel->getFinances($id);
+        // echo "<pre>" . print_r($result, true) ."<\pre>";
+        echo json_encode($finances);
     }
 
     private function get_strat_rand_amount($type): int {
@@ -167,5 +205,23 @@ class User extends \Core\Controller
         }
 
         return $amount;
+    }
+
+    /**
+     * Method to generate random date between two dates
+     * @param $sStartDate
+     * @param $sEndDate
+     * @param string $sFormat
+     * @return bool|string
+     */
+    private function randomDate($sStartDate, $sEndDate, $sFormat = 'Y-m-d H:i:s')
+    {
+        // Convert the supplied date to timestamp
+        $fMin = strtotime($sStartDate);
+        $fMax = strtotime($sEndDate);
+        // Generate a random number from the start and end dates
+        $fVal = mt_rand($fMin, $fMax);
+        // Convert back to the specified date format
+        return date($sFormat, $fVal);
     }
 }
