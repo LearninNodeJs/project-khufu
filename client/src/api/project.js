@@ -9,6 +9,7 @@ const Projects =  [
   },
   {
     username: 'shark123',
+
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/suprb/128.jpg',    
     name: 'Lebon Bauma',
     deadline: '1 weeks later',
@@ -17,6 +18,7 @@ const Projects =  [
   },
   {
     username: 'mbaku123',
+
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/ludwiczakpawel/128.jpg',    
     name: 'Tobena Ka',
     deadline: '1 Month later',
@@ -33,6 +35,7 @@ const Projects =  [
   },
   {
     username: 'Caspergrl',
+
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/caspergrl/128.jpg',    
     name: 'Project Deploy',
     deadline: 'half year later',

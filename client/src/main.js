@@ -9,6 +9,7 @@ import {sync} from 'vuex-router-sync';
 import {store} from './store'
 import 'font-awesome/css/font-awesome.css';
 import AlertComponent from './components/utils/Alert'
+
 import './theme/default.styl';
 import Truncate from 'lodash.truncate';
 import ECharts from 'vue-echarts/components/ECharts'

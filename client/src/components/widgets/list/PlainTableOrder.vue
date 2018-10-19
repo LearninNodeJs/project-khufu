@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
+
     <v-toolbar card dense color="transparent">
       <v-toolbar-title><h4>Accounts Requests</h4></v-toolbar-title>
       <v-spacer></v-spacer>
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+
 import items from '@/api/order';
 export default {
   data () {
@@ -64,11 +66,16 @@ export default {
       let item = Math.floor(Math.random() * this.colors.length);
       return this.colors[item];
     },
-  },
-  methods: {
-    getColorByStatus (status) {
-      return this.colors[status];
+    computed: {
+      randomColor () {
+        let item = Math.floor(Math.random() * this.colors.length);
+        return this.colors[item];
+      },
     },
-  }
-};
+    methods: {
+      getColorByStatus (status) {
+        return this.colors[status];
+      },
+    }
+  };
 </script>

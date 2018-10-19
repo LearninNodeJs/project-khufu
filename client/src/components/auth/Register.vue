@@ -85,6 +85,15 @@
                   <v-btn outline  color="primary">Submit</v-btn>
                 </div>
 
+                        <div class="d-flex">
+                          <v-switch
+                            label="I Agree to the Terms and Conditions "
+                          ></v-switch>
+                        </div>
+                        <div class="form-btn">
+                          <v-btn outline  color="primary">Submit</v-btn>
+                        </div>
+
 
 
 

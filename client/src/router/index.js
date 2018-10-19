@@ -4,7 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/auth/Login'
 import DashBoard from '@/components/dashboard/DashBoard.vue'
 import Registration from '@/components/auth/Register.vue'
-
+import Dashboard from '@/components/dashboard/Dashboard.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +25,10 @@ export default new Router({
       path:'/registration',
       name:'Registration',
       component:Registration
+    },{
+      path:'/dashboard',
+      name: 'Dashboard',
+      component:Dashboard
     }
   ],mode:'history'
 })

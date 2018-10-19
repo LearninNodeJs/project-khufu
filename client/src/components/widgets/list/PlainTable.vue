@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
+
     <v-toolbar card dense color="transparent">
       <v-toolbar-title><h4>Users</h4></v-toolbar-title>
       <v-spacer></v-spacer>
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+
 import { Projects } from '@/api/project';
 export default {
   data () {
@@ -75,6 +77,5 @@ export default {
     projects () {
       return Projects;
     }
-  }
-};
+  };
 </script>
