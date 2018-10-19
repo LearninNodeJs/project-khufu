@@ -19,6 +19,7 @@
           :headers="headers"
           :items="items"
           :search="searchKey"
+          hide-actions
           class="elevation-0 table-striped"
         >
           <template slot="items" slot-scope="props">
@@ -78,4 +79,5 @@ export default {
       },
     }
   };
+
 </script>

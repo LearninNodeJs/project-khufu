@@ -6,6 +6,8 @@ RewriteEngine On
 
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "http://localhost:8080"
+    Header set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Accept, Origin, Authorization"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, PATCH, OPTIONS"
 </IfModule>
 
 RewriteCond %{REQUEST_FILENAME} !-f

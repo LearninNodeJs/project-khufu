@@ -12,6 +12,7 @@ const Projects =  [
 
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/suprb/128.jpg',    
     name: 'Lebon Bauma',
+
     deadline: '1 weeks later',
     progress: 70,
     color: 'success'
@@ -21,6 +22,7 @@ const Projects =  [
 
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/ludwiczakpawel/128.jpg',    
     name: 'Tobena Ka',
+
     deadline: '1 Month later',
     progress: 50,
     color: 'info'
@@ -53,4 +55,6 @@ const getProject = (limit) => {
 export {
   Projects,
   getProject
+  auth
 };
+

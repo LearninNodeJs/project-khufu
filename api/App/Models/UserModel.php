@@ -42,7 +42,7 @@ class UserModel extends \Core\Model
                 array_push($result, $user['phone']);
                 array_push($result, $user['dob']);
 
-
+                // print_r($result);
                 return $result;
             }else{
                 return $result['error'] = true;
@@ -101,10 +101,12 @@ class UserModel extends \Core\Model
     }
 
     public function add_payment_record($table, $amount, $bal_before, $id, $fname, $lname){
+        
         $stmt = $this->db->prepare("INSERT INTO $table (fname, lname, transaction_code, amt_transacted, bal_before, bal_after, date_time, id) VALUES (:fname, :lname, :transaction_code, :amt_transacted, :bal_before, :bal_after, :date_time, :id)");
         $stmt->bindValue(':fname', $fname);
         $stmt->bindValue(':lname', $lname);        
-        $stmt->bindValue(':transaction_code', 'MJF'.base64_encode(openssl_random_pseudo_bytes(7)));        
+        $bytes = random_bytes(4);      
+        $stmt->bindValue(':transaction_code', 'MJF'.bin2hex($bytes));  
         $stmt->bindValue(':amt_transacted', $amount);       
         $stmt->bindValue(':bal_before', $bal_before);       
         $stmt->bindValue(':bal_after', $bal_before + $amount);        
@@ -112,14 +114,14 @@ class UserModel extends \Core\Model
         $stmt->bindValue(':id', $id);
 
         if($stmt->execute()){
-            return $this->last_payment_record($table, $id);
-            exit;
+            return $this->last_finance_record($table, $id);
+            // exit;
         }else {
             return false;
         }  
     }
 
-    public function last_payment_record($table, $id){
+    public function last_finance_record($table, $id){
 
         $stmt = $this->db->prepare("SELECT bal_after FROM $table WHERE id = :id ORDER BY trans_id DESC LIMIT 1");
         $stmt->bindValue(':id', $id);
@@ -133,6 +135,71 @@ class UserModel extends \Core\Model
         
     }
 
+    public function getFinances($id){
+        $result = '';
+        $result['mpesa']['expenses'] = [];
+        $result['mpesa']['income'] = []; 
+        $result['bank']['expenses'] = [];
+        $result['bank']['income'] = [];
+
+        $stmt = $this->db->prepare("SELECT amt_transacted AS m_ex FROM `mpesa_records` WHERE amt_transacted < 0 AND id = :id");
+        $stmt->bindValue(':id', $id);
+
+        if($stmt->execute()){
+
+            $mpesa = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($mpesa as $row) {
+                array_push($result['mpesa']['expenses'], $row['m_ex']);
+            }
+            
+        }
+
+        $stmt = $this->db->prepare("SELECT amt_transacted AS m_in FROM `mpesa_records` WHERE amt_transacted > 0 AND id = :id");
+        $stmt->bindValue(':id', $id);
+
+        if($stmt->execute()){
+
+            $mpesa = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($mpesa as $row) {
+                array_push($result['mpesa']['income'], $row['m_in']);
+            }
+            
+        }
+
+        $stmt = $this->db->prepare("SELECT amt_transacted AS b_in FROM `bank_records` WHERE amt_transacted > 0 AND id = :id");
+        $stmt->bindValue(':id', $id);
+
+        if($stmt->execute()){
+
+            $mpesa = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($mpesa as $row) {
+                array_push($result['bank']['income'], $row['b_in']);
+            }
+            
+        }
+
+        $stmt = $this->db->prepare("SELECT amt_transacted AS b_ex FROM `bank_records` WHERE amt_transacted < 0 AND id = :id");
+        $stmt->bindValue(':id', $id);
+
+        if($stmt->execute()){
+
+            $mpesa = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($mpesa as $row) {
+                array_push($result['bank']['expenses'], $row['b_ex']);
+            }
+            
+           
+        }
+
+        // echo "<pre>" . print_r($result, true) ."<\pre>";
+        return $result;
+
+    }
+
     public function get_user($id){
         $stmt = $this->db->prepare("SELECT fname, lname, email, phone, dob, activated FROM users WHERE id = :id");
         $stmt->bindValue(':id', $id);
@@ -142,6 +209,32 @@ class UserModel extends \Core\Model
         }else{
             return false;
         }
+        
+    }
+
+  public function get_leases($id){
+
+        if($id != ""){
+
+            $stmt = $this->db->query("SELECT * FROM leases");
+
+            if($stmt->execute()){
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }else{
+                return false;
+            }
+        }else{
+
+            $stmt = $this->db->prepare("SELECT * FROM leases WHERE id = :id");
+            $stmt->bindValue(':id', $id);
+
+            if($stmt->execute()){
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }else{
+                return false;
+            }
+        }
+        
         
     }
 

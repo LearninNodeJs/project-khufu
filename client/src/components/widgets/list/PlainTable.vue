@@ -13,6 +13,7 @@
      ></v-text-field>
     </v-toolbar>
     </v-card-title>
+
     <v-divider></v-divider>
     <v-card-text class="pa-0">
       <template>
@@ -20,6 +21,8 @@
           :headers="headers"
           :items="projects"
           :search="searchKey"
+
+          hide-actions
           class="elevation-0"
         >
           <template slot="items" slot-scope="props">
@@ -46,9 +49,7 @@
     </v-card-text>
   </v-card>
 </template>
-
 <script>
-
 import { Projects } from '@/api/project';
 export default {
   data () {
@@ -78,4 +79,5 @@ export default {
       return Projects;
     }
   };
+
 </script>

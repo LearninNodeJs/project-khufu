@@ -33,7 +33,14 @@ $router = new Core\Router();
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('/user/login', ['controller' => 'User', 'action' => 'login']);
+$router->add('user', ['controller' => 'User', 'action' => 'userDash']);
 $router->add('seed', ['controller' => 'User', 'action' => 'seed']);
+$router->add('user/expense-and-income', ['controller' => 'User', 'action' => 'getUserFinance']);
+
+// Audit routes
+$router->add('user/confirmation', ['controller' => 'Audit', 'action' => 'confirmUser']);
+$router->add('lease/pay', ['controller' => 'Audit', 'action' => 'leasePayments']);
+
 $router->add('{controller}/{action}');
-    
+    // echo $_SERVER['QUERY_STRING'];
 $router->dispatch($_SERVER['QUERY_STRING']);
