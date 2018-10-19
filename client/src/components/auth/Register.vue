@@ -24,10 +24,10 @@
                   </v-flex>
                   <v-flex xs8>
                     <v-text-field
-                      name="fName"
+                      name="firstName"
                       label="Enter your first name"
                       color="primary"
-                      id="fName"
+                      v-model="firstName"
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
@@ -37,11 +37,11 @@
                   </v-flex>
                   <v-flex xs8>
                     <v-text-field
-                      name="lName"
+                      name="lastName"
                       label="Enter your last name"
-                      value="Label"
-                      color="success"
+                      color="primary"
                       class="input-group--focused"
+                      v-model="lastName"
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
@@ -51,14 +51,13 @@
                   </v-flex>
                   <v-flex xs8>
                     <v-text-field
-                      name="phoneNo"
+                      name="phoneNumber"
                       label="Enter your phone Number"
-                      value="Input text"
                       append-icon="phone"
+                      v-model="phoneNumber"
                     ></v-text-field>
                   </v-flex>
                 </v-layout>
-
                       <v-layout row >
                         <v-flex xs4>
                           <v-subheader>Enter your date of birth</v-subheader>
@@ -90,12 +89,7 @@
                             </v-date-picker>
                           </v-menu>
                         </v-flex>
-
-
                       </v-layout>
-
-
-
               </v-container>
             </div>
           </v-widget>
@@ -114,6 +108,11 @@
     data () {
       return {
         email: '',
+        firstName:'',
+        lastName:'',
+        phoneNumber:'',
+        date:'',
+        menu:'',
         rules: {
           required: (value) => !!value || 'Required.',
           email: (value) => {

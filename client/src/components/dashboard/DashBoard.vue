@@ -5,55 +5,46 @@
         <!-- mini statistic start -->
         <v-flex lg3 sm6 xs12>
           <mini-statistic
-            icon="fa fa-facebook"
-            title="100+"
-            sub-title="Likes"
+            icon="fa fa-users"
+            title="500+"
+            sub-title="Users"
             color="indigo"
           >
           </mini-statistic>
         </v-flex>
         <v-flex lg3 sm6 xs12>
           <mini-statistic
-            icon="fa fa-google"
+            icon="fa fa-money"
             title="150+"
-            sub-title="Connections"
+            sub-title="Pending Payments"
             color="red"
           >
           </mini-statistic>
         </v-flex>
         <v-flex lg3 sm6 xs12>
           <mini-statistic
-            icon="fa fa-twitter"
+            icon="fa fa-check"
             title="200+"
-            sub-title="Followers"
-            color="light-blue"
+            sub-title="Verified Payments"
+            color="green"
           >
           </mini-statistic>
         </v-flex>
         <v-flex lg3 sm6 xs12>
           <mini-statistic
-            icon="fa fa-instagram"
+            icon="fa fa-home"
             title="50+"
-            sub-title="Shots"
-            color="purple"
+            sub-title="Mortgage Plans"
+            color="light-blue"
           >
           </mini-statistic>
         </v-flex>
         <!-- mini statistic  end -->
-        <v-flex lg8 sm12 xs12>
-          <v-widget title="My Payment History" content-bg="white">
-            <v-btn icon slot="widget-header-action">
-              <v-icon class="text--secondary">refresh</v-icon>
-            </v-btn>
-            <div slot="widget-content">
-              <v-chart
-                :options="polar"
-                height="400px"
-                width="100%"
-              >
-              </v-chart>
-            </div>
-          </v-widget>
+        <v-flex lg6 sm12 xs12>
+          <v-userprofiles/>
+        </v-flex>
+        <v-flex lg6 sm12 xs12>
+          <v-user-processing/>
         </v-flex>
       </v-layout>
     </v-container>
@@ -61,6 +52,7 @@
 </template>
 
 <script>
+
   import EChart from 'vue-echarts/components/ECharts';
   import MiniStatistic from '@/components/widgets/statistic/MiniStatistic';
   import VWidget from '@/components/VWidget';

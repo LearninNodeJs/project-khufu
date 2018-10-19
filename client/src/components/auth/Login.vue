@@ -61,7 +61,7 @@
       },
       async onClickRegistration(){
         try{
-          this.$router.push('/dashboard')
+          this.$router.push('/registration')
         }catch (e) {
           console.log(e.message);
         }
