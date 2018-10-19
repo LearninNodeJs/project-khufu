@@ -1,16 +1,17 @@
 <template>
   <v-card>
     <v-card-title>
-      <v-toolbar card dense color="transparent">
-        <v-toolbar-title><h4>Users</h4></v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-text-field
-          name="search"
-          v-model="searchKey"
-          append-icon="search"
-          label="Find User"
-        ></v-text-field>
-      </v-toolbar>
+
+    <v-toolbar card dense color="transparent">
+      <v-toolbar-title><h4>Users</h4></v-toolbar-title>
+      <v-spacer></v-spacer>
+     <v-text-field
+     name="search"
+     v-model="searchKey"
+     append-icon="search"
+     label="Find User"
+     ></v-text-field>
+    </v-toolbar>
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text class="pa-0">
@@ -47,33 +48,34 @@
 </template>
 
 <script>
-  import { Projects } from '@/api/project';
-  export default {
-    data () {
-      return {
-        searchKey:'',
-        headers: [
-          {
-            text: '',
-            align: 'center',
-            sortable: false,
-            value: 'avatar'
-          },
-          {
-            text: 'Name',
-            align: 'left',
-            value: 'name'
-          },
-          { text: 'Deadline', value: 'deadline' },
-          { text: 'Progress', value: 'progress' },
-          { text: 'Action', value: 'action', align: 'right' },
-        ],
-      };
-    },
-    computed: {
-      projects () {
-        return Projects;
-      }
+
+import { Projects } from '@/api/project';
+export default {
+  data () {
+    return {
+      searchKey:'',
+      headers: [
+        {
+          text: '',
+          align: 'center',
+          sortable: false,
+          value: 'avatar'
+        },
+        {
+          text: 'Name',
+          align: 'left',
+          value: 'name'
+        },
+        { text: 'Deadline', value: 'deadline' },
+        { text: 'Progress', value: 'progress' },
+        { text: 'Action', value: 'action', align: 'right' },
+
+      ],
+    };
+  },
+  computed: {
+    projects () {
+      return Projects;
     }
   };
 </script>

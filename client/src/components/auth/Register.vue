@@ -57,24 +57,33 @@
                   </v-flex>
                 </v-layout>
 
-                      <v-layout row >
-                        <v-flex xs4>
-                          <v-subheader>Enter your date of birth</v-subheader>
-                        </v-flex>
-                        <v-flex xs8>
+                <v-layout row >
+                  <v-flex xs4>
+                    <v-subheader>Enter your date of birth</v-subheader>
+                  </v-flex>
+                  <v-flex xs8>
 
-                        <v-text-field
-                          class="mr-2"
-                          label="DD/MM/YYYY"
-                          append-icon="today"
+                    <v-text-field
+                      class="mr-2"
+                      label="DD/MM/YYYY"
+                      append-icon="today"
 
-                          required
-                        ></v-text-field>
+                      required
+                    ></v-text-field>
 
 
-        </v-flex>
+                  </v-flex>
 
-                      </v-layout>
+                </v-layout>
+
+                <div class="d-flex">
+                  <v-switch
+                    label="I Agree to the Terms and Conditions "
+                  ></v-switch>
+                </div>
+                <div class="form-btn">
+                  <v-btn outline  color="primary">Submit</v-btn>
+                </div>
 
                         <div class="d-flex">
                           <v-switch

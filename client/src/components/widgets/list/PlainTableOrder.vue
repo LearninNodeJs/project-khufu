@@ -1,15 +1,16 @@
 <template>
   <v-card>
     <v-card-title>
-      <v-toolbar card dense color="transparent">
-        <v-toolbar-title><h4>Accounts Requests</h4></v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-text-field
-          name="search"
-          label="Find"
-          v-model="searchKey"
-          append-icon="search"></v-text-field>
-      </v-toolbar>
+
+    <v-toolbar card dense color="transparent">
+      <v-toolbar-title><h4>Accounts Requests</h4></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-text-field
+      name="search"
+      label="Find"
+      v-model="searchKey"
+      append-icon="search"></v-text-field>
+    </v-toolbar>
     </v-card-title>
     <v-divider></v-divider>
     <v-card-text class="pa-0">
@@ -34,29 +35,36 @@
 </template>
 
 <script>
-  import items from '@/api/order';
-  export default {
-    data () {
-      return {
-        searchKey:'',
-        headers: [
-          {
-            text: '#',
-            align: 'left',
-            sortable: false,
-            value: 'id'
-          },
-          { text: 'Product', value: 'deadline' },
-          { text: 'Price', value: 'progress' },
-          { text: 'Status', value: 'status' },
-        ],
-        items: items,
-        colors: {
-          processing: 'blue',
-          sent: 'red',
-          delivered: 'green'
-        }
-      };
+
+import items from '@/api/order';
+export default {
+  data () {
+    return {
+      searchKey:'',
+      headers: [
+        {
+          text: '#',
+          align: 'left',
+          sortable: false,
+          value: 'id'
+        },
+        { text: 'Product', value: 'deadline' },
+        { text: 'Price', value: 'progress' },
+        { text: 'Status', value: 'status' },
+
+      ],
+      items: items,
+      colors: {
+        processing: 'blue',
+        sent: 'red',
+        delivered: 'green'
+      }
+    };
+  },
+  computed: {
+    randomColor () {
+      let item = Math.floor(Math.random() * this.colors.length);
+      return this.colors[item];
     },
     computed: {
       randomColor () {
