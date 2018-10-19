@@ -43,6 +43,13 @@ export const store = new Vuex.Store({
         commit('setError', error);
         commit('setLoading', false);
       }
+    },
+    async clearError({commit}){
+      try{
+        commit('clearError');
+      }catch (error) {
+        console.log('Error Clearing Error',error.message);
+      }
     }
   },
   getters: {
