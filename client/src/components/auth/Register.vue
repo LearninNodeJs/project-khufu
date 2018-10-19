@@ -39,7 +39,6 @@
                     <v-text-field
                       name="lName"
                       label="Enter your last name"
-                      value="Label"
                       color="success"
                       class="input-group--focused"
                     ></v-text-field>
@@ -53,7 +52,6 @@
                     <v-text-field
                       name="phoneNo"
                       label="Enter your phone Number"
-                      value="Input text"
                       append-icon="phone"
                     ></v-text-field>
                   </v-flex>
@@ -63,36 +61,30 @@
                         <v-flex xs4>
                           <v-subheader>Enter your date of birth</v-subheader>
                         </v-flex>
-                        <v-flex xs8 >
-                          <v-menu
-                            ref="menu"
-                            lazy
-                            :close-on-content-click="false"
-                            v-model="menu"
-                            transition="scale-transition"
-                            offset-y
-                            full-width
-                            :nudge-right="40"
-                            min-width="290px"
-                            :return-value.sync="date"
-                          >
-                            <v-text-field
-                              slot="activator"
-                              label="choose"
-                              v-model="date"
-                              prepend-icon="event"
-                              readonly
-                            ></v-text-field>
-                            <v-date-picker v-model="date" no-title scrollable>
-                              <v-spacer></v-spacer>
-                              <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-                              <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-                            </v-date-picker>
-                          </v-menu>
-                        </v-flex>
+                        <v-flex xs8>
 
+                        <v-text-field
+                          class="mr-2"
+                          label="DD/MM/YYYY"
+                          append-icon="today"
+
+                          required
+                        ></v-text-field>
+
+
+        </v-flex>
 
                       </v-layout>
+
+                        <div class="d-flex">
+                          <v-switch
+                            label="I Agree to the Terms and Conditions "
+                          ></v-switch>
+                        </div>
+                        <div class="form-btn">
+                          <v-btn outline  color="primary">Submit</v-btn>
+                        </div>
+
 
 
 
