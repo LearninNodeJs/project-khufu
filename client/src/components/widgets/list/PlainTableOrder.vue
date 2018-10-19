@@ -1,20 +1,16 @@
 <template>
   <v-card>
-   <v-card-title> <v-toolbar card dense color="transparent">
-
-      <v-toolbar-title><h4>Account Requests</h4>
-      </v-toolbar-title>
-     <v-spacer></v-spacer>
-      <v-text-field
-      name="Search"
-      v-model="searchKey"
-      append-icon="search"
-      label="Find">
-
-      </v-text-field>
-
-    </v-toolbar>
-   </v-card-title>
+    <v-card-title>
+      <v-toolbar card dense color="transparent">
+        <v-toolbar-title><h4>Accounts Requests</h4></v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-text-field
+          name="search"
+          label="Find"
+          v-model="searchKey"
+          append-icon="search"></v-text-field>
+      </v-toolbar>
+    </v-card-title>
     <v-divider></v-divider>
     <v-card-text class="pa-0">
       <template>
@@ -38,41 +34,40 @@
 </template>
 
 <script>
-import items from '@/api/order';
-export default {
-  data () {
-    return {
-      searchKey:'',
-      headers: [
-        {
-          text: '#',
-          align: 'left',
-          sortable: false,
-          value: 'id'
-        },
-        { text: 'Product', value: 'deadline' },
-        { text: 'Price', value: 'progress' },
-        { text: 'Status', value: 'status' },
-
-      ],
-      items: items,
-      colors: {
-        processing: 'blue',
-        sent: 'red',
-        delivered: 'green'
-      }
-    };
-  },
-  computed: {
-    randomColor () {
-      let item = Math.floor(Math.random() * this.colors.length);
-      return this.colors[item];
+  import items from '@/api/order';
+  export default {
+    data () {
+      return {
+        searchKey:'',
+        headers: [
+          {
+            text: '#',
+            align: 'left',
+            sortable: false,
+            value: 'id'
+          },
+          { text: 'Product', value: 'deadline' },
+          { text: 'Price', value: 'progress' },
+          { text: 'Status', value: 'status' },
+        ],
+        items: items,
+        colors: {
+          processing: 'blue',
+          sent: 'red',
+          delivered: 'green'
+        }
+      };
     },
-  },
-  methods: {
-    getColorByStatus (status) {
-      return this.colors[status];
+    computed: {
+      randomColor () {
+        let item = Math.floor(Math.random() * this.colors.length);
+        return this.colors[item];
+      },
     },
-  }
-};
+    methods: {
+      getColorByStatus (status) {
+        return this.colors[status];
+      },
+    }
+  };
 </script>

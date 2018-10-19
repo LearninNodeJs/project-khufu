@@ -15,7 +15,7 @@
         <v-flex lg3 sm6 xs12>
           <mini-statistic
             icon="fa fa-money"
-            title="15+"
+            title="150+"
             sub-title="Pending Payments"
             color="red"
           >
@@ -34,18 +34,17 @@
           <mini-statistic
             icon="fa fa-home"
             title="50+"
-            sub-title="Mortgages plans "
+            sub-title="Mortgage Plans"
             color="light-blue"
           >
           </mini-statistic>
         </v-flex>
         <!-- mini statistic  end -->
         <v-flex lg6 sm12 xs12>
-           <v-userprofiles/>
+          <v-userprofiles/>
         </v-flex>
         <v-flex lg6 sm12 xs12>
-
-        <v-userequest/>
+          <v-user-processing/>
         </v-flex>
       </v-layout>
     </v-container>
