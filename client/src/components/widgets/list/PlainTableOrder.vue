@@ -1,19 +1,27 @@
 <template>
   <v-card>
-    <v-toolbar card dense color="transparent">
-      <v-toolbar-title><h4>Order</h4></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>more_vert</v-icon>
-      </v-btn>      
+   <v-card-title> <v-toolbar card dense color="transparent">
+
+      <v-toolbar-title><h4>Account Requests</h4>
+      </v-toolbar-title>
+     <v-spacer></v-spacer>
+      <v-text-field
+      name="Search"
+      v-model="searchKey"
+      append-icon="search"
+      label="Find">
+
+      </v-text-field>
+
     </v-toolbar>
+   </v-card-title>
     <v-divider></v-divider>
     <v-card-text class="pa-0">
       <template>
         <v-data-table
           :headers="headers"
           :items="items"
-          hide-actions
+          :search="searchKey"
           class="elevation-0 table-striped"
         >
           <template slot="items" slot-scope="props">
@@ -34,6 +42,7 @@ import items from '@/api/order';
 export default {
   data () {
     return {
+      searchKey:'',
       headers: [
         {
           text: '#',

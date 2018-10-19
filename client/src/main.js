@@ -11,10 +11,13 @@ import AlertComponent from './components/utils/Alert'
 import ECharts from 'vue-echarts/components/ECharts'
 import 'font-awesome/css/font-awesome.css';
 import UserProfilesTable from './components/widgets/list/PlainTable'
+import UserRequestProcessing from './components/widgets/list/PlainTableOrder'
+
 
 Vue.use(Vuetify)
 Vue.component('v-chart',ECharts);
 Vue.component('v-userprofiles',UserProfilesTable);
+Vue.component('v-userequest', UserRequestProcessing);
 Vue.config.productionTip = false;
 Vue.component('app-alert',AlertComponent);
 

@@ -40,8 +40,12 @@
           </mini-statistic>
         </v-flex>
         <!-- mini statistic  end -->
-        <v-flex lg8 sm12 xs12>
+        <v-flex lg6 sm12 xs12>
            <v-userprofiles/>
+        </v-flex>
+        <v-flex lg6 sm12 xs12>
+
+        <v-userequest/>
         </v-flex>
       </v-layout>
     </v-container>
