@@ -11,8 +11,8 @@
                   <h1 class="flex my-4 primary--text">Project Khufu</h1>
                 </div>                
                 <v-form>
-                  <v-text-field append-icon="person" name="email" label="Login" type="text" v-model="email"></v-text-field>
-                  <v-text-field append-icon="lock" name="password" label="Password" id="password" type="password" v-model="password"></v-text-field>
+                  <v-text-field append-icon="person" name="email" label="Login" type="text" v-model="model.email"></v-text-field>
+                  <v-text-field append-icon="lock" name="password" label="Password" id="password" type="password" v-model="model.password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -26,7 +26,7 @@
                   <v-icon color="light-blue">fa fa-twitter fa-lg</v-icon>
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn block color="primary" @click.native="login" :loading="loading">Login</v-btn>
+                <v-btn block color="primary" @click="login" :loading="loading">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -35,50 +35,37 @@
     </v-content>
   </v-app>
 </template>
+
 <script>
 /* eslint-disable */
-  export default {
-    data(){
-      
-      return{
-        loading: false,
+export default {
+  data: () => ({
+    loading: false,
+    model: {
         email: 'speedflakes@gmail.com',
         password: 'admin'
-      }
-    },
-    methods:{
-      async login(){
+    }
+  }),
+
+  methods: {
+    async login(){
         try{
-          this.loading = true;
-          this.$store.dispatch('login',{email:this.email,password:this.password}).then(response => {
-              if(this.$store.state.error === null){
-                  this.loading = false;
-                setTimeout(() => {
-                  this.$router.push('/dashboard');
-                }, 700);
-                     
-              }
-          });
-          
-        //this.$store.dispatch('setToken',response.data.jwt);
-          //console.log(this.$store.state.loading);
+          this.$store.dispatch('login',{email:this.email,password:this.password});
+          // console.log(data);
+          // console.log(response);
+          // this.$store.dispatch('setToken',response.data.jwt);
+         this.loading = true;
+ /*       setTimeout(() => {
+          this.$router.push('/dashboard');
+        }, 1000);*/
+
         }catch (e) {
           console.log(e.message);
         }
       }
-    },
-    computed:{
-        isFormValid(){
-          return this.email !== '' && this.password !==''
-        },
-        isLoading(){
-          return this.$store.state.loading;
-        },
-        error(){
-          return this.$store.error;
-        }
-    }
   }
+
+};
 </script>
 <style scoped lang="css">
   #login {

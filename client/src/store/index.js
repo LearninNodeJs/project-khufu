@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue';
 import Vuex from 'vuex';
 import api from '../services/api';
@@ -6,7 +7,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state:{
-    user:null,
+    user:1,
     loading:null,
     error:null,
     token:null
@@ -37,14 +38,25 @@ export const store = new Vuex.Store({
         commit('setLoading', true);
         
         response = await api('login').post('', payload);
-        // alert(response.data.jwt);
+        // console.log(response.toString());
         commit('setToken', response.data.jwt);
         commit('setLoading', false);
       }catch(error){
         commit('setError', error);
         commit('setLoading', false);
       }
+    },
+    async userDash({commit}){
+      let response;
+      try{
+        commit('clearError');
+        response = await api('login').get('/' + this.state.user);
+
+      }catch(error){
+        commit('setError', error);
+      }
     }
+
   },
   getters: {
     token(state) {

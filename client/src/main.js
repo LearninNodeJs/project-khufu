@@ -28,7 +28,7 @@ Vue.use(Vuetify, {
     themeVariations: ['primary', 'secondary', 'accent'],
     extra: {
       mainToolbar: {
-        color: 'primary',
+        color: 'secondary',
       },
       sideToolbar: {
       },
@@ -38,6 +38,7 @@ Vue.use(Vuetify, {
     }
   }
 });
+
 // Bootstrap application components
 sync(store,router);
 new Vue({
