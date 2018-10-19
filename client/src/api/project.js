@@ -1,24 +1,24 @@
 const Projects =  [
   {
-    username: 'Dessie',
+    username: 'mtotodev05',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/ludwiczakpawel/128.jpg',
-    name: 'Template PSD',
+    name: 'Brian Kamau',
     deadline: '2 days later',
     progress: 90,
     color: 'pink',
   },
   {
-    username: 'Jakayla',
+    username: 'shark123',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/suprb/128.jpg',
-    name: 'Logo Design',
+    name: 'Lebon Bauma',
     deadline: '1 weeks later',
     progress: 70,
     color: 'success'
   },
   {
-    username: 'Ludwiczakpawel',
+    username: 'mbaku123',
     avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/ludwiczakpawel/128.jpg',
-    name: 'REST API',
+    name: 'Tobena Ka',
     deadline: '1 Month later',
     progress: 50,
     color: 'info'
