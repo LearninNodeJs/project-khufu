@@ -9,7 +9,7 @@
                   <h1 class="flex my-4 primary--text">Project Khufu</h1>
                 </div>
                 <v-form>
-                  <v-text-field append-icon="person" name="login" label="Login" type="text" v-model="email"></v-text-field>
+                  <v-text-field append-icon="person" name="login" label="Login" type="email" v-model="email"></v-text-field>
                   <v-text-field append-icon="lock" name="password" label="Password" id="password" type="password" v-model="password"></v-text-field>
                 </v-form>
               </v-card-text>

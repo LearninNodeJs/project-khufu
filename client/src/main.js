@@ -7,11 +7,17 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import {sync} from 'vuex-router-sync';
 import {store} from './store'
+import 'font-awesome/css/font-awesome.css';
 import AlertComponent from './components/utils/Alert'
-Vue.use(Vuetify)
+import './theme/default.styl';
+import Truncate from 'lodash.truncate';
+import ECharts from 'vue-echarts/components/ECharts'
 
+Vue.filter('truncate',Truncate);
 Vue.config.productionTip = false;
 Vue.component('app-alert',AlertComponent);
+Vue.component('v-chart',ECharts);
+Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 sync(store,router);
